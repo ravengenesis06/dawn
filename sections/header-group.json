@@ -17,17 +17,19 @@
       },
       "block_order": [
         "announcement-bar-0"
-      ]
+      ],
+      "settings": {
+      }
     },
     "header": {
       "type": "header",
       "settings": {
-        "color_scheme": "background-1",
         "logo_position": "middle-left",
         "menu": "main-menu",
         "menu_type_desktop": "dropdown",
         "sticky_header_type": "on-scroll-up",
         "show_line_separator": true,
+        "color_scheme": "background-1",
         "enable_country_selector": true,
         "enable_language_selector": true,
         "mobile_logo_position": "center",
@@ -35,10 +37,20 @@
         "padding_top": 20,
         "padding_bottom": 20
       }
+    },
+    "62da08d2-6e0b-4adf-85af-365dea1f7203": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<!-- Add this to layout\/theme.liquid before closing head tag-->\n\n{%- if customer.metafields.sparklayer.authentication -%}\n<!-- Anything inside here only shows for logged in customers-->\n<!-- Start of SparkLayer core script-->\n<script>\n  window.sparkOptions = {\n    siteId: \"orrohome\",\n    platform: \"shopify\",\n    rootUrl: {{ routes.root_url | json }},\n    language: {{ request.locale.iso_code | json }},\n    accountRedirect: {\n      urlRegex: \/\\\/account\/g,\n      goTo: \"\/index\", \/\/ page to redirect logged in users to\n    },\n    display: {\n      stock: {\n        show: false, \/\/ set to true to show stock level display\n        max: 50, \/\/ highest stock level to show\n        last: 5, \/\/ last remaining stock\n        low: 15, \/\/ low stock threshold\n        last: true, \/\/ set to false to hide last stock message\n      },\n    },\n    auth: {\n      user: {{ customer.email | json }},\n      token: {{ customer.metafields.sparklayer.authentication | json }},\n    },\n  };\n<\/script>\n<script async src=\"https:\/\/cdn.sparklayer.io\/spark.0.8.46.js\"><\/script>\n<!-- End of SparkLayer core script-->\n{%- endif -%}",
+        "color_scheme": "background-1",
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
     }
   },
   "order": [
     "announcement-bar",
-    "header"
+    "header",
+    "62da08d2-6e0b-4adf-85af-365dea1f7203"
   ]
 }
