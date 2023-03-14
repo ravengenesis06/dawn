@@ -242,39 +242,6 @@
         document.documentElement.classList.add('shopify-design-mode');
       }
     </script>
-    <!-- Add this to layout/theme.liquid before closing head tag -->
-
-    {%- if customer.metafields.sparklayer.authentication -%}
-      <!-- Anything inside here only shows for logged in customers -->
-      <!-- Start of SparkLayer core script -->
-      <script>
-        window.sparkOptions = {
-          siteId: "orrohome",
-          platform: "shopify",
-          rootUrl: {{ routes.root_url | json }},
-          language: {{ request.locale.iso_code | json }},
-          accountRedirect: {
-            urlRegex: /\/account/g,
-            goTo: "/index", // page to redirect logged in users to
-          },
-          display: {
-            stock: {
-              show: false, // set to true to show stock level display
-              max: 50, // highest stock level to show
-              last: 5, // last remaining stock
-              low: 15, // low stock threshold
-              last: true, // set to false to hide last stock message
-            },
-          },
-          auth: {
-            user: {{ customer.email | json }},
-            token: {{ customer.metafields.sparklayer.authentication | json }},
-          },
-        };
-      </script>
-      <script async src="https://cdn.sparklayer.io/spark.0.8.46.js"></script>
-      <!-- End of SparkLayer core script -->
-    {%- endif -%}
   </head>
 
   <!-- Add this to layout/theme.liquid before closing head tag -->
@@ -337,6 +304,7 @@
       
       
       
+      
       window.shopUrl = '{{ request.origin }}';
       window.routes = {
         cart_add_url: '{{ routes.cart_add_url }}',
@@ -364,6 +332,7 @@
         pauseSlideshow: `{{ 'sections.slideshow.pause_slideshow' | t }}`,
         playSlideshow: `{{ 'sections.slideshow.play_slideshow' | t }}`,
       }
+
 
 
 
